@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Enigma de la Piedra Filosofal - Ficción Interactiva</title>
+    <!-- Google Fonts: Cinzel para Títulos y Lora para Párrafos y Enlaces -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Estilos CSS Externos / Estética Mágica (Hogwarts) -->
+    <style>
+        :root {
+            --bg-color: #12151c;
+            --container-bg: #1c2230;
+            --parchment: #f4ebd0;
+            --gold: #d4af37;
+            --gold-hover: #f3e5ab;
+            --dark-red: #58111a;
+            --text-main: #e2d9c2;
+            --text-muted: #b3a78c;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Lora', serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+            max-width: 800px;
+        }
+
+        h1 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        h2 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold-hover);
+            font-size: 1.8rem;
+            margin-top: 0;
+            border-bottom: 2px solid var(--dark-red);
+            padding-bottom: 8px;
+        }
+
+        p {
+            font-family: 'Lora', serif;
+            font-size: 1.15rem;
+            line-height: 1.7;
+            color: var(--text-main);
+            margin-bottom: 20px;
+        }
+
+        a {
+            font-family: 'Lora', serif;
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--gold-hover);
+            text-decoration: underline;
+        }
+
+        main {
+            width: 100%;
+            max-width: 800px;
+            background-color: var(--container-bg);
+            border: 2px solid var(--gold);
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            box-sizing: border-box;
+            margin-bottom: 30px;
+        }
+
+        .node-section {
+            display: none;
+        }
+
+        .node-section.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .media-container {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .media-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            border: 2px solid var(--gold);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+        }
+
+        .choices-box {
+            margin-top: 25px;
+            padding: 20px;
+            background: rgba(88, 17, 26, 0.25);
+            border-left: 4px solid var(--dark-red);
+            border-radius: 4px;
+        }
+
+        .choices-box ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin: 0;
+        }
+
+        .choices-box li {
+            margin-bottom: 12px;
+        }
+
+        .choices-box a.btn-choice {
+            display: block;
+            background: var(--dark-red);
+            color: var(--parchment);
+            padding: 12px 18px;
+            border-radius: 6px;
+            border: 1px solid var(--gold);
+            text-align: center;
+            font-family: 'Cinzel', serif;
+            font-size: 1.05rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .choices-box a.btn-choice:hover {
+            background: var(--gold);
+            color: var(--bg-color);
+            text-decoration: none;
+            transform: translateX(5px);
+        }
+
+        .audio-embed {
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        footer {
+            text-align: center;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-top: auto;
+            border-top: 1px solid #333;
+            padding-top: 15px;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        footer a {
+            color: var(--gold);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Hogwarts: El Enigma de la Piedra Filosofal</h1>
+        <p>Una aventura interactiva basada en los eventos clásicos del primer año en el Colegio de Magia y Hechicería.</p>
+    </header>
+
+    <main>
+        <!-- AUDIO / AMBIENTE EMBEBIDO (Película 1 - John Williams Theme) -->
+     <div class="video">
+      <iframe src="https://www.youtube-nocookie.com/embed/9D3r4mN31-k" title="Música ambiente de Hogwarts" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+        </div>
+
+        <!-- ================= NODO 1: INICIO (Nivel 1) ================= -->
+        <section id="nodo-1" class="node-section active">
+            <h2>Nivel 1: La Ceremonia de Selección y el Misterio del Paquete</h2>
+            <p>Te encuentras sentado en el Gran Comedor con el Sombrero Seleccionador sobre tu cabeza. Susurros mágicos inundan la sala mientras el sombrero grita: <strong>¡Gryffindor!</strong> Tras el banquete, las advertencias del director Albus Dumbledore resuenan en tu mente: <em>el corredor del tercer piso está prohibido para todos aquellos que no quieran sufrir una muerte dolorosa</em>.</p>
+            <p>Es medianoche en la Torre de Gryffindor. Hermione duerme profundamente, pero tú y Ron descubren que alguien ha forzado una cerradura en el pasillo prohibido. Al acercaros, escucháis los ronquidos titánicos de una bestia y descubrís una trampilla entre sus enormes patas.</p>
+            
+            <div class="media-container">
+                <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1000&auto=format&fit=crop" alt="Castillo antiguo iluminado bajo la luz de la luna simulando los pasillos oscuros de Hogwarts" loading="lazy">
+            </div>
+
+            <p>¿Qué decides hacer ante este misterio basado en los apuntes de la bóveda 713 de Gringotts?</p>
+
+            <div class="choices-box">
+                <ul>
+                    <li><a class="btn-choice" href="#nodo-2" onclick="showNode('nodo-2')">1. Abrir la trampilla y descender valientemente al misterioso escondite de la Piedra.</a></li>
+                    <li><a class="btn-choice" href="#nodo-3" onclick="showNode('nodo-3')">2. Investigar primero en la Sección Prohibida de la Biblioteca buscando pistas sobre Nicolas Flamel.</a></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ================= NODO 2: INTERMEDIO A (Nivel 2) ================= -->
+        <section id="nodo-2" class="node-section">
+            <h2>Nivel 2: Las Pruebas Subterráneas (Ruta de la Trampilla)</h2>
+            <p>Al saltar por la trampilla, caes directamente sobre una masa de zarcillos fríos y asfixiantes: el <strong>Lazo del Diablo</strong>. Comienza a enredarse alrededor de tus extremidades atrapándote con fuerza.</p>
+            <p>Recuerdas las sabias palabras de Hermione en clase de Herbología: <em>¡El Lazo del Diablo odia la luz y el calor!</em> Debes actuar con rapidez antes de que te asfixie por completo.</p>
+            
+            <div class="media-container">
+                <img src="https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?q=80&w=1000&auto=format&fit=crop" alt="Antiguas mazmorras oscuras y misteriosas con vegetación iluminadas por destellos mágicos" loading="lazy">
+            </div>
+
+            <p>Elige tu siguiente movimiento:</p>
+
+            <div class="choices-box">
+                <ul>
+                    <li><a class="btn-choice" href="#nodo-4" onclick="showNode('nodo-4')">1. Conjurar el hechizo de llamas azules (Lumos Solem) para liberar el camino hacia la sala del espejo.</a></li>
+                    <li><a class="btn-choice" href="#nodo-5" onclick="showNode('nodo-5')">2. Forcejear desesperadamente sin usar la varita contra las enredaderas oscuras.</a></li>
+                    <li><br><a href="#nodo-1" onclick="showNode('nodo-1')">⬅ Volver al inicio de la aventura</a></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ================= NODO 3: INTERMEDIO B (Nivel 2) ================= -->
+        <section id="nodo-3" class="node-section">
+            <h2>Nivel 2: La Biblioteca y el Secreto de Nicolas Flamel</h2>
+            <p>Decides ponerte la Capa de Invisibilidad y escabullirte hacia la Sección Prohibida de la Biblioteca a altas horas de la noche. Entre tomos antiguos encuadernados en cuero de dragón, abres un libro polvoriento y descubres la verdad: la <strong>Piedra Filosofal</strong> fue creada por Nicolas Flamel, y alguien planea robarla esta misma noche.</p>
+            <p>De repente, una lámpara se enciende cerca. El profesor Severus Snape patrulla los pasillos y sus ojos negros se posan fijamente en la estantería donde te ocultas.</p>
+            
+            <div class="media-container">
+                <img src="https://sl.bing.net/kYIPbEl1JAG" Biblioteca antigua y misteriosa llena de estanterías de libros iluminadas por velas tenues" loading="lazy">
+            </div>
+
+            <p>¿Cómo reaccionas ante la presencia del temido profesor de pociones?</p>
+
+            <div class="choices-box">
+                <ul>
+                    <li><a class="btn-choice" href="#nodo-4" onclick="showNode('nodo-4')">1. Utilizar un ingenioso truco con libros flotantes para distraer a Snape y correr hacia la cámara secreta.</a></li>
+                    <li><a class="btn-choice" href="#nodo-5" onclick="showNode('nodo-5')">2. Quedar paralizado por el miedo, permitiendo que Snape descubra tu capa y te capture.</a></li>
+                    <li><br><a href="#nodo-1" onclick="showNode('nodo-1')">⬅ Volver al inicio de la aventura</a></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ================= NODO 4: FINAL EXITOSO (Nivel 3) ================= -->
+        <section id="nodo-4" class="node-section">
+            <h2>Nivel 3: El Triunfo de Gryffindor (Final Exitoso)</h2>
+            <p>¡Has demostrado valor, astucia y lealtad inquebrantable! Al superar los obstáculos guiado por el espíritu de las pruebas de Hogwarts, logras frustrar los oscuros planes del profesor Quirrell y Lord Voldemort frente al Espejo de Oesed.</p>
+            <p>En la fiesta de fin de año, el director Albus Dumbledore otorga los puntos decisivos a Gryffindor. Te alzas con la victoria de la Copa de las Casas, consolidando tu lugar en la historia del colegio como un verdadero héroe.</p>
+            
+            <div class="media-container">
+                <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=1000&auto=format&fit=crop" alt="Gran salón decorado con estandartes dorados celebrando la victoria escolar con magia" loading="lazy">
+            </div>
+
+            <p>¡Has completado con éxito la ficción interactiva de Harry Potter y la Piedra Filosofal!</p>
+
+            <div class="choices-box">
+                <ul>
+                    <li><a class="btn-choice" href="#nodo-1" onclick="showNode('nodo-1')">🔄 Reiniciar la aventura desde el principio</a></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ================= NODO 5: FINAL TRÁGICO / DERROTA (Nivel 3) ================= -->
+        <section id="nodo-5" class="node-section">
+            <h2>Nivel 3: Atrapado en las Mazmorras (Final Trágico)</h2>
+            <p>Un paso en falso, la falta de concentración o la duda en el momento crítico te han costado caro. El peligro de las mazmorras y la severidad de las normas de Hogwarts se han cernido sobre ti.</p>
+            <p>Argus Filch y la señora Norris te han interceptado en los pasillos oscuros. Has sido entregado directamente al profesor Snape para cumplir un castigo eterno limpiando bacinicas de peltre sin magia en las mazmorras más profundas.</p>
+            
+            <div class="media-container">
+                <img src="https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=1000&auto=format&fit=crop" alt="Mazmorras oscuras de piedra húmeda con antorchas tenues y frascos de pociones" loading="lazy">
+            </div>
+
+            <p>Tu aventura ha terminado prematuramente en el calabozo. ¡Inténtalo de nuevo y toma mejores decisiones!</p>
+
+            <div class="choices-box">
+                <ul>
+                    <li><a class="btn-choice" href="#nodo-1" onclick="showNode('nodo-1')">🔄 Volver a intentarlo (Reiniciar)</a></li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Desarrollado por <strong>Aldana Arces</strong> | Conecta conmigo en <a href="https://www.instagram.com/aldi_arces/" target="_blank" rel="noopener">Instagram Personal</a></p>
+    </footer>
+
+    <!-- Script JavaScript simple para alternar nodos de manera interactiva tipo hipertexto -->
+    <script>
+        function showNode(nodeId) {
+            // Ocultar todas las secciones
+            const sections = document.querySelectorAll('.node-section');
+            sections.forEach(sec => sec.classList.remove('active'));
+            
+            // Mostrar la sección seleccionada
+            const target = document.getElementById(nodeId);
+            if (target) {
+                target.classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        // Manejar navegación por hash al cargar o cambiar URL
+        window.addEventListener('hashchange', () => {
+            const hash = window.location.hash.substring(1);
+            if (hash) {
+                showNode(hash);
+            }
+        });
+
+        // Carga inicial basada en hash si existe
+        window.addEventListener('DOMContentLoaded', () => {
+            const hash = window.location.hash.substring(1);
+            if (hash && document.getElementById(hash)) {
+                showNode(hash);
+            }
+        });
+    </script>
+</body>
+</html>
